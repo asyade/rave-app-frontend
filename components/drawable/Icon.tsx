@@ -1,11 +1,11 @@
 import { Image } from 'react-native'
 
-function AssetIcon({ asset }) {
+function AssetIcon({ asset, style = { width: 24, height: 24 } }) {
     const source = asset;
     return function ({ }) {
         return (
             <Image
-                style={{ width: 24, height: 24 }}
+                style={style}
                 source={source}
             />
         )

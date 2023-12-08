@@ -7,9 +7,10 @@ import {
 
 import { useAuth0, Auth0Provider } from 'react-native-auth0';
 import { logger } from "react-native-logs";
-import Main from './views/main';
+import { styles } from './components/theme';
+import Main from './components/views/Main';
 
-var log = logger.createLogger();
+export const log = logger.createLogger();
 
 function Root() {
   const { height, width } = useWindowDimensions()
@@ -19,7 +20,6 @@ function Root() {
   const [authenticating, setAuthenticating] = useState(false);
 
   const onLogin = async () => {
-    log.info("Onlogin");
     try {
       await authorize();
       let credentials = await getCredentials();
@@ -28,7 +28,7 @@ function Root() {
       console.error(e);
     }
     setAuthenticating(false)
-}
+  }
 
   useEffect(() => {
     if (!loggedIn && !isLoading && !authenticating) {
@@ -36,23 +36,13 @@ function Root() {
       log.info("Condtion meet");
       onLogin();
     } else {
-      log.info("Condtion not meet");
+      log.info("Condtion not");
     }
   }, [user, isLoading, authenticating])
 
   if (isLoading) {
     return (
-      <View style={{
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#151414',
-      }}>
+      <View style={styles.absoluteFill}>
         <Image
           style={{
             width: 96,
@@ -64,7 +54,7 @@ function Root() {
     );
   } else {
     return (
-      <Main/>
+      <Main />
     );
   }
 }

@@ -11,7 +11,7 @@ export default function Section({ children, style = {} }) {
 
   return (<View style={[
     {
-      backgroundColor: '#151414',
+      backgroundColor: '#242424',
       width: responsive({
         Normal: SECTION_WIDTH_NORMAL,
         Big: SECTION_WIDTH_BIG,

@@ -8,6 +8,17 @@ const SECTION_WIDTH_NORMAL = 600;
 const SECTION_WIDTH_BIG = 800;
 
 const styles = StyleSheet.create({
+  absoluteFill: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#151414',
+  },
   sectionView: {
     flex: 1,
     columnGap: COMMON_SIDE_MARGIN,
