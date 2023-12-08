@@ -31,8 +31,7 @@
       [
         "react-native-auth0",
         {
-          "domain": "dev-pucpqiqy6v8crnkr.us.auth0.com",
-          "customScheme": "YOUR_CUSTOM_SCHEME"
+          "domain": "dev-pucpqiqy6v8crnkr.us.auth0.com"
         }
       ]
     ]

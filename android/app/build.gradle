@@ -83,8 +83,8 @@ android {
 
     namespace 'com.rave.app'
     defaultConfig {
-// @generated begin react-native-auth0-manifest-placeholder - expo prebuild (DO NOT MODIFY) sync-89f8c3c1cbeb42356ef26bf32343447139613ff0
-manifestPlaceholders = [auth0Domain: "dev-pucpqiqy6v8crnkr.us.auth0.com", auth0Scheme: "YOUR_CUSTOM_SCHEME"]
+// @generated begin react-native-auth0-manifest-placeholder - expo prebuild (DO NOT MODIFY) sync-06817f4eb91de24b7b42cef010f7232854bcbf40
+manifestPlaceholders = [auth0Domain: "dev-pucpqiqy6v8crnkr.us.auth0.com", auth0Scheme: "com.rave.app.auth0"]
 // @generated end react-native-auth0-manifest-placeholder
         applicationId 'com.rave.app'
         minSdkVersion rootProject.ext.minSdkVersion
