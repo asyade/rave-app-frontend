@@ -22,22 +22,8 @@ import { useAuth0, Auth0Provider } from 'react-native-auth0';
 import { logger } from "react-native-logs";
 import MainTabProfile, { MainTabProfileBar } from './MainTabProfile';
 import Bar from '../layouts/Bar';
-
-
-function HomeTab() {
-    const header = <View style={{ paddingBottom: 4 }}><StoryList></StoryList></View>;
-    return <Content ListHeaderComponent={header} data={[
-        { id: "1" },
-        { id: "2" },
-        { id: "3" },
-        { id: "4" },
-        { id: "5" },
-        { id: "6" },
-        { id: "7" },
-        { id: "8" },
-        { id: "9" },
-    ]} />
-}
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import MainTabHome from './MainTabHome';
 
 function GemsTab() {
     return <Content data={[
@@ -77,12 +63,19 @@ export default function Main() {
     const [currentTab, setCurrentTab] = useState("home");
     const { clearSession, user, error, isLoading } = useAuth0();
 
+    // Initialize Apollo Client
+    const client = new ApolloClient({
+        uri: process.env.EXPO_PUBLIC_API_URL,
+        cache: new InMemoryCache()
+    });
+
+
     console.log(user)
     let rootComponent = null;
     let bar = null;
     switch (currentTab) {
         case "home":
-            rootComponent = (<HomeTab />)
+            rootComponent = (<MainTabHome />)
             bar = (<DefaultBar />)
             break;
         case "gems":
@@ -108,16 +101,18 @@ export default function Main() {
     }
 
     return (
-        <Container>
-            <StatusBar
-                backgroundColor={'#151414'}
-                barStyle={'light-content'}
-                animated={true}
-                hidden={false}
-            />
-            <Header>{bar}</Header>
-            {rootComponent}
-            {!isLoading && <Footer activeTab={currentTab} onTabSelected={(name) => setCurrentTab(name)} />}
-        </Container>
+        <ApolloProvider client={client}>
+            <Container>
+                <StatusBar
+                    backgroundColor={'#151414'}
+                    barStyle={'light-content'}
+                    animated={true}
+                    hidden={false}
+                />
+                <Header>{bar}</Header>
+                {rootComponent}
+                {!isLoading && <Footer activeTab={currentTab} onTabSelected={(name) => setCurrentTab(name)} />}
+            </Container>
+        </ApolloProvider>
     );
 }
