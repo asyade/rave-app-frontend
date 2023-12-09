@@ -1,8 +1,6 @@
-import { FlatList, ScrollView, View, useWindowDimensions } from "react-native";
-import { SECTION_WIDTH_BIG, SECTION_WIDTH_NORMAL, responsive } from "../theme";
-import { useEffect, useRef, useState } from "react";
+import { ActivityIndicator, FlatList, View } from "react-native";
+import { COMMON_SECTION_GAP } from "../theme";
 import PreviewPost from "../reusable/PreviewPost";
-import StoryList from "../reusable/StoryList";
 
 function renderItem(item) {
     return (
@@ -12,11 +10,25 @@ function renderItem(item) {
     )
 }
 
-export default function Content({ ListHeaderComponent=null, data }) {
-    return <FlatList
-        ListHeaderComponent={ListHeaderComponent}
-        data={data}
-        renderItem={({item}) => <>{renderItem(item)}</>}
-        keyExtractor={item => item.id}
-    />
+type ContentProps = {
+    ListHeaderComponent?: any,
+    data: any[] | undefined,
+}
+
+export default function Content({ ListHeaderComponent = null, data }: ContentProps) {
+    return (
+        <View style={{position: 'relative'}}>
+            <FlatList
+                ListHeaderComponent={ListHeaderComponent}
+                data={data}
+                renderItem={({ item }) => <>{ renderItem(item) }</>}
+                keyExtractor={item => item.id}
+            />
+            {
+                (!data) && (
+                    <View style={{ flex: 1, paddingTop: COMMON_SECTION_GAP }}><ActivityIndicator></ActivityIndicator></View>
+                )
+            }
+        </View>
+    )
 }

@@ -1,68 +1,70 @@
 import React, { useEffect, useState } from 'react';
 import {
   View,
-  useWindowDimensions,
   Image,
+  ActivityIndicator,
+  StatusBar,
 } from 'react-native';
 
-import { useAuth0, Auth0Provider } from 'react-native-auth0';
+import { useAuth0, Auth0Provider, Credentials } from 'react-native-auth0';
 import { logger } from "react-native-logs";
 import { styles } from './components/theme';
 import Main from './components/views/Main';
 
 export const log = logger.createLogger();
 
-function Root() {
-  const { height, width } = useWindowDimensions()
-  const [currentTab, setCurrentTab] = useState("home");
-  const { authorize, user, error, getCredentials, isLoading } = useAuth0();
-  const loggedIn = user !== undefined && user !== null;
+export function MainView() {
+  const { authorize, user, getCredentials, isLoading } = useAuth0();
   const [authenticating, setAuthenticating] = useState(false);
+  const [credentials, setCredentials] = useState(undefined as Credentials | undefined);
 
-  const onLogin = async () => {
-    try {
-      await authorize();
-      let credentials = await getCredentials();
-      console.log(credentials);
-    } catch (e) {
-      console.error(e);
-    }
-    setAuthenticating(false)
-  }
+  const onLogin = () => authorize()
+    .then(() => getCredentials())
+    .then(setCredentials)
+    .then(() => setAuthenticating(false))
+    .then(() => log.info!(`Authentication successful for ${user.name}`))
+    .catch((e) => log.error("Error while authenticating !", e));
+
+  const onResumeSession = () => getCredentials()
+    .then(setCredentials)
+    .then(() => setAuthenticating(false))
+    .then(() => log.info!(`Already authenticated as ${user.name}`))
+    .catch((e) => log.error("Error while loading crdentials !", e));
 
   useEffect(() => {
-    if (!loggedIn && !isLoading && !authenticating) {
+    if (!isLoading && !authenticating && !credentials) {
       setAuthenticating(true);
-      log.info("Condtion meet");
-      onLogin();
-    } else {
-      log.info("Condtion not");
+      user && onResumeSession() || onLogin();
     }
   }, [user, isLoading, authenticating])
 
-  if (isLoading) {
-    return (
-      <View style={styles.absoluteFill}>
-        <Image
-          style={{
-            width: 96,
-            height: 96,
-          }}
-          source={require("./assets/logo.png")}
-        />
-      </View>
-    );
-  } else {
-    return (
-      <Main />
-    );
-  }
+  return (
+    <>
+      {
+        (user && credentials && !authenticating)
+        &&
+        (<Main credentials={credentials} />)
+        ||
+        (<View style={styles.absoluteFill}>
+          <ActivityIndicator />
+        </View>)
+      }
+    </>
+  );
 }
 
 export default function App() {
   return (
-    <Auth0Provider domain={"dev-pucpqiqy6v8crnkr.us.auth0.com"} clientId={"FkPCr5W89Zn4eJpacrVBFQbZ9QrIEFDn"}>
-      <Root />
-    </Auth0Provider>
+    <>
+      <StatusBar
+        backgroundColor={'#151414'}
+        barStyle={'light-content'}
+        animated={true}
+        hidden={false}
+      />
+      <Auth0Provider domain={process.env.EXPO_PUBLIC_AUTH0_DOMAIN} clientId={process.env.EXPO_PUBLIC_AUTH0_CLIENT_ID}>
+        <MainView />
+      </Auth0Provider>
+    </>
   );
 }

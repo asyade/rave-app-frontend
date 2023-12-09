@@ -1,117 +1,50 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
-    StyleSheet,
-    Text,
-    View,
-    Pressable,
-    useWindowDimensions,
-    Image,
-    StatusBar,
+    StatusBar, View,
 } from 'react-native';
 
-import { IconBtnAdd, IconBtnAlert, IconBtnChat, IconBtnSearch } from '../drawable/Icon';
-import Button, { ButtonStyles } from '../inputs/Button';
 import Container from '../layouts/Container';
 import Header from '../reusable/Header';
-import StoryList from '../reusable/StoryList';
-import CreatePost from '../reusable/CreatePost';
-import PreviewPost from '../reusable/PreviewPost';
 import Footer from '../reusable/Footer';
 import Content from '../layouts/Content';
-import { useAuth0, Auth0Provider } from 'react-native-auth0';
-import { logger } from "react-native-logs";
+import { Credentials } from 'react-native-auth0';
 import MainTabProfile, { MainTabProfileBar } from './MainTabProfile';
-import Bar from '../layouts/Bar';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import MainTabHome from './MainTabHome';
+import MainBar from './MainBar';
 
-function GemsTab() {
-    return <Content data={[
-    ]} />
+const tabs = {
+    "home": () => { return { content: (<MainTabHome />), bar: (<MainBar />) } },
+    "gems": () => { return { content: (<Content data={[]} />), bar: (<MainBar />) } },
+    "music": () => { return { content: (<Content data={[]} />), bar: (<MainBar />) } },
+    "event": () => { return { content: (<Content data={[]} />), bar: (<MainBar />) } },
+    "stream": () => { return { content: (<Content data={[]} />), bar: (<MainBar />) } },
+    "profile": () => { return { content: (<MainTabProfile />), bar: (<MainTabProfileBar />) } },
+};
+
+type MainProps = {
+    credentials: Credentials
 }
 
-function EventTab() {
-    return <Content data={[
-    ]} />
-}
-
-function MusicTab() {
-    return <Content data={[
-    ]} />
-}
-
-function StreamTab() {
-    return <Content data={[
-    ]} />
-}
-
-function DefaultBar() {
-    return (
-        <View style={{}}>
-            <Bar style={{ columnGap: 32 }}>
-                <Button style={[ButtonStyles.Icon]}><IconBtnAdd /></Button>
-                <Button style={[ButtonStyles.Icon]}><IconBtnSearch /></Button>
-                <Button style={[ButtonStyles.Icon]}><IconBtnAlert /></Button>
-                <Button style={[ButtonStyles.Icon]}><IconBtnChat /></Button>
-            </Bar>
-        </View>
-    )
-}
-
-export default function Main() {
-    const { height, width } = useWindowDimensions()
+export default function Main({ credentials }: MainProps) {
     const [currentTab, setCurrentTab] = useState("home");
-    const { clearSession, user, error, isLoading } = useAuth0();
 
-    // Initialize Apollo Client
     const client = new ApolloClient({
+        headers: { authorization: `Bearer ${credentials.accessToken}` },
         uri: process.env.EXPO_PUBLIC_API_URL,
         cache: new InMemoryCache()
     });
 
-
-    console.log(user)
-    let rootComponent = null;
-    let bar = null;
-    switch (currentTab) {
-        case "home":
-            rootComponent = (<MainTabHome />)
-            bar = (<DefaultBar />)
-            break;
-        case "gems":
-            rootComponent = (<GemsTab />)
-            bar = (<DefaultBar />)
-        case "music":
-            rootComponent = (<MusicTab />)
-            bar = (<DefaultBar />)
-        case "event":
-            rootComponent = (<EventTab />)
-            bar = (<DefaultBar />)
-        case "stream":
-            rootComponent = (<StreamTab />)
-            bar = (<DefaultBar />)
-            break;
-        case "profile":
-            rootComponent = (<MainTabProfile />)
-            bar = (<MainTabProfileBar />)
-            break;
-        default:
-            rootComponent = <Text>...</Text>
-            bar = (<DefaultBar />)
-    }
+    const { content, bar } = tabs[currentTab]();
 
     return (
         <ApolloProvider client={client}>
-            <Container>
-                <StatusBar
-                    backgroundColor={'#151414'}
-                    barStyle={'light-content'}
-                    animated={true}
-                    hidden={false}
-                />
+            <Container style={{ height: "100vh" }}>
                 <Header>{bar}</Header>
-                {rootComponent}
-                {!isLoading && <Footer activeTab={currentTab} onTabSelected={(name) => setCurrentTab(name)} />}
+                <View style={{flex: 1}}>
+                    {content}
+                </View>
+                <Footer activeTab={currentTab} onTabSelected={(name) => setCurrentTab(name)} />
             </Container>
         </ApolloProvider>
     );

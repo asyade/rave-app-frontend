@@ -10,14 +10,16 @@ export function MainTabProfileBar() {
     const { user } = useAuth0()
     return (
         <>
-            <View style={{ overflow: 'hidden'}}>
-                <Text style={{color: "white", fontSize: 16}}>{user.name}</Text>
+            <View style={{ overflow: 'hidden' }}>
+                <Text style={{ color: "white", fontSize: 16 }}>{user.name}</Text>
             </View>
         </>
     )
 }
 
 export default function MainTabProfile() {
-    return <Content data={[
-    ]} />
+    const { user } = useAuth0()
+    return <View>
+        <Text>Hello {user.name}</Text>
+    </View>
 }

@@ -3,6 +3,7 @@ import {
   } from 'react-native';
   
 const COMMON_SIDE_MARGIN = 16;
+const COMMON_SECTION_GAP = 16;
 
 const SECTION_WIDTH_NORMAL = 600;
 const SECTION_WIDTH_BIG = 800;
@@ -47,6 +48,7 @@ export {
   COMMON_SIDE_MARGIN,
   SECTION_WIDTH_BIG,
   SECTION_WIDTH_NORMAL,
+  COMMON_SECTION_GAP,
   styles,
   responsive,
 }
