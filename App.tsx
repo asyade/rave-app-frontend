@@ -9,7 +9,7 @@ import {
 import { useAuth0, Auth0Provider, Credentials } from 'react-native-auth0';
 import { logger } from "react-native-logs";
 import { styles } from './components/theme';
-import Main from './components/views/Main';
+import Main from './components/pages/Main';
 
 export const log = logger.createLogger();
 

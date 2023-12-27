@@ -1,7 +1,7 @@
-import Bar from "../layouts/Bar";
-import Button, { ButtonStyles } from "../inputs/Button";
-import Section from "../layouts/Section";
-import { IconBtnSearch, IconTabEvent, IconTabGems, IconTabHome, IconTabMusic, IconTabStream } from "../drawable/Icon";
+import Bar from "../templates/Bar";
+import Button, { ButtonStyles } from "../atomes/Button";
+import Section from "../templates/Section";
+import { IconBtnSearch, IconTabEvent, IconTabGems, IconTabHome, IconTabMusic, IconTabStream } from "../molecules/Icon";
 import { COMMON_SIDE_MARGIN, PRIMARY_COLOR, styles } from "../theme";
 import { View, Image, StyleSheet } from 'react-native'
 import { useAuth0, User } from "react-native-auth0";

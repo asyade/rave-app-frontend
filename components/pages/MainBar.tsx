@@ -1,7 +1,7 @@
 import { View } from "react-native";
-import Bar from "../layouts/Bar";
-import Button, { ButtonStyles } from "../inputs/Button";
-import { IconBtnAdd, IconBtnAlert, IconBtnChat, IconBtnSearch } from '../drawable/Icon';
+import Bar from "../templates/Bar";
+import Button, { ButtonStyles } from "../atomes/Button";
+import { IconBtnAdd, IconBtnAlert, IconBtnChat, IconBtnSearch } from '../molecules/Icon';
 
 export default function MainBar() {
     return (

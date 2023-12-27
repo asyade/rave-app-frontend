@@ -3,10 +3,10 @@ import {
     StatusBar, View,
 } from 'react-native';
 
-import Container from '../layouts/Container';
-import Header from '../reusable/Header';
-import Footer from '../reusable/Footer';
-import Content from '../layouts/Content';
+import Container from '../templates/Container';
+import Header from '../cells/Header';
+import Footer from '../cells/Footer';
+import Content from '../templates/ContentList';
 import { Credentials } from 'react-native-auth0';
 import MainTabProfile, { MainTabProfileBar } from './MainTabProfile';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
@@ -15,10 +15,10 @@ import MainBar from './MainBar';
 
 const tabs = {
     "home": () => { return { content: (<MainTabHome />), bar: (<MainBar />) } },
-    "gems": () => { return { content: (<Content data={[]} />), bar: (<MainBar />) } },
-    "music": () => { return { content: (<Content data={[]} />), bar: (<MainBar />) } },
-    "event": () => { return { content: (<Content data={[]} />), bar: (<MainBar />) } },
-    "stream": () => { return { content: (<Content data={[]} />), bar: (<MainBar />) } },
+    "gems": () => { return { content: (<Content data={null} error={null} />), bar: (<MainBar />) } },
+    "music": () => { return { content: (<Content data={null} error={null}/>), bar: (<MainBar />) } },
+    "event": () => { return { content: (<Content data={null} error={null}/>), bar: (<MainBar />) } },
+    "stream": () => { return { content: (<Content data={null} error={null}/>), bar: (<MainBar />) } },
     "profile": () => { return { content: (<MainTabProfile />), bar: (<MainTabProfileBar />) } },
 };
 

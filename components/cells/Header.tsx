@@ -5,8 +5,8 @@ import {
     StyleSheet
 } from 'react-native';
 
-import Bar from '../layouts/Bar';
-import Section from '../layouts/Section';
+import Bar from '../templates/Bar';
+import Section from '../templates/Section';
 import { styles } from '../theme';
 
 export default function Header({children}) {

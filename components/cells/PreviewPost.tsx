@@ -1,6 +1,6 @@
 import { View, Text, Image } from "react-native";
-import PostAvatar from "../drawable/PostAvatar";
-import Section from "../layouts/Section";
+import PostAvatar from "../atomes/AvatarButton";
+import Section from "../templates/Section";
 import { COMMON_SIDE_MARGIN, styles } from "../theme";
 
 export default function PreviewPost({ title = "User name" }) {

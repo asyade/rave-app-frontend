@@ -1,9 +1,9 @@
-import Content from "../layouts/Content";
-import { IconBtnAdd, IconBtnAlert, IconBtnChat, IconBtnSearch } from '../drawable/Icon';
-import Button, { ButtonStyles } from '../inputs/Button';
+import Content from "../templates/ContentList";
+import { IconBtnAdd, IconBtnAlert, IconBtnChat, IconBtnSearch } from '../molecules/Icon';
+import Button, { ButtonStyles } from '../atomes/Button';
 import { useAuth0, Auth0Provider } from 'react-native-auth0';
 import { logger } from "react-native-logs";
-import Bar from '../layouts/Bar';
+import Bar from '../templates/Bar';
 import { View, Text } from "react-native";
 
 export function MainTabProfileBar() {

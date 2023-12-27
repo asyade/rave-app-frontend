@@ -1,5 +1,5 @@
 import { View, Pressable, Image, Text } from "react-native";
-import Section from "../layouts/Section";
+import Section from "../templates/Section";
 import { COMMON_SIDE_MARGIN, styles } from "../theme";
 import { LinearGradient } from "expo-linear-gradient";
 import { useAuth0 } from "react-native-auth0";

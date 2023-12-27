@@ -1,6 +1,6 @@
 import { ActivityIndicator, FlatList, View, Text } from "react-native";
 import { COMMON_SECTION_GAP } from "../theme";
-import PreviewPost from "../reusable/PreviewPost";
+import PreviewPost from "../cells/PreviewPost";
 
 function renderItem(item) {
     return (
@@ -12,8 +12,8 @@ function renderItem(item) {
 
 type ContentProps = {
     ListHeaderComponent?: any,
-    data: any[] | undefined,
-    error: string | undefined,
+    data: any[] | undefined | null,
+    error: string | undefined | null,
 }
 
 export default function Content({ ListHeaderComponent = null, data, error }: ContentProps) {
