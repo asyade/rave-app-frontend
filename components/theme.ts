@@ -8,6 +8,8 @@ const COMMON_SECTION_GAP = 16;
 const SECTION_WIDTH_NORMAL = 600;
 const SECTION_WIDTH_BIG = 800;
 
+const PRIMARY_COLOR = '#EE8D35';
+
 const styles = StyleSheet.create({
   absoluteFill: {
     position: 'absolute',
@@ -49,6 +51,7 @@ export {
   SECTION_WIDTH_BIG,
   SECTION_WIDTH_NORMAL,
   COMMON_SECTION_GAP,
+  PRIMARY_COLOR,
   styles,
   responsive,
 }

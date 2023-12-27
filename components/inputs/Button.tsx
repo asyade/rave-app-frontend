@@ -5,6 +5,7 @@ import {
   Image,
   Pressable
 } from "react-native";
+import { PRIMARY_COLOR } from "../theme";
 
 enum ButtonVariants {
   Primary,
@@ -26,6 +27,13 @@ const ButtonStyles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'center',
     width: 32,
+  },
+  "Primary": {
+    padding: 10,
+    alignItems: 'center',
+    alignContent: 'center',
+    backgroundColor: PRIMARY_COLOR,
+    color: 'white',
   }
 });
 

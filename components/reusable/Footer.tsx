@@ -2,7 +2,7 @@ import Bar from "../layouts/Bar";
 import Button, { ButtonStyles } from "../inputs/Button";
 import Section from "../layouts/Section";
 import { IconBtnSearch, IconTabEvent, IconTabGems, IconTabHome, IconTabMusic, IconTabStream } from "../drawable/Icon";
-import { COMMON_SIDE_MARGIN, styles } from "../theme";
+import { COMMON_SIDE_MARGIN, PRIMARY_COLOR, styles } from "../theme";
 import { View, Image, StyleSheet } from 'react-native'
 import { useAuth0, User } from "react-native-auth0";
 
@@ -14,7 +14,7 @@ export default function Footer({ activeTab = "home", onTabSelected = (name) => {
                 <Button onClick={() => onTabSelected(name)} style={[ButtonStyles.Icon]}>
                     <>
                         {children}
-                        { (name == activeTab) && <View style={{width: 48, top: -10, position: 'absolute', borderTopColor: '#EE8D35', borderTopWidth: 4}}></View> }
+                        { (name == activeTab) && <View style={{width: 48, top: -10, position: 'absolute', borderTopColor: PRIMARY_COLOR, borderTopWidth: 4}}></View> }
                     </>
                 </Button>
         )

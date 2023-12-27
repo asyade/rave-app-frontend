@@ -43,6 +43,8 @@ To prepare your development environment, follow these steps:
 For the frontend application to function properly, it's essential that the backend is up and running. (and have your environ variable `EXPO_PUBLIC_API_URL` setup accordingly). You have two options for this:
 
 1. **Running Locally**: If you choose to run the backend locally, ensure that it's started before initiating the frontend development server. This local setup is ideal for development and testing purposes.
+    > Set `EXPO_PUBLIC_API_URL` to `http://0.0.0.0:3000` when running the app from an emulator, use your public IP address when using a real device (the device must be connected on the same wifi network).
+
     > See [this repository](https://github.com/asyade/rave-app-backend) for more details on how to run the backend
 
 2. **Using a Development Server**: Alternatively, you can connect to a backend hosted on a development server. This is useful for testing in an environment that closely resembles production.

@@ -18,8 +18,10 @@ export function MainTabProfileBar() {
 }
 
 export default function MainTabProfile() {
-    const { user } = useAuth0()
-    return <View>
-        <Text>Hello {user.name}</Text>
-    </View>
+    const { user, clearCredentials } = useAuth0()
+    return (
+        <View style={{ flex: 1 }}>
+            <Button style={[ButtonStyles.Primary]} onClick={() => {clearCredentials()}}><Text>Logout</Text></Button>
+        </View>
+    )
 }

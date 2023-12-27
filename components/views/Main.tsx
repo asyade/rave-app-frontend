@@ -30,7 +30,7 @@ export default function Main({ credentials }: MainProps) {
     const [currentTab, setCurrentTab] = useState("home");
 
     const client = new ApolloClient({
-        headers: { authorization: `Bearer ${credentials.accessToken}` },
+        headers: { authorization: `Bearer ${credentials.idToken}` },
         uri: process.env.EXPO_PUBLIC_API_URL,
         cache: new InMemoryCache()
     });

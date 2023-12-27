@@ -18,11 +18,11 @@ export function MainView() {
   const [authenticating, setAuthenticating] = useState(false);
   const [credentials, setCredentials] = useState(undefined as Credentials | undefined);
 
-  const onLogin = () => authorize()
+  const onLogin = () => authorize({ scope: 'openid profile email' })
     .then(() => getCredentials())
     .then(setCredentials)
     .then(() => setAuthenticating(false))
-    .then(() => log.info!(`Authentication successful for ${user.name}`))
+    .then(() => log.info!(`Authentication successful for ${user}`))
     .catch((e) => log.error("Error while authenticating !", e));
 
   const onResumeSession = () => getCredentials()
