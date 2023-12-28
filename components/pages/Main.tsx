@@ -80,7 +80,7 @@ export default function Main({ credentials }: MainProps) {
         />
       </Container>
       {currentPopup && (
-        <Container>
+        <Container style={{ height: "100vh" }}>
           <HeaderLayout
             logoComponent={
               <View
@@ -100,6 +100,7 @@ export default function Main({ credentials }: MainProps) {
           >
             {currentPopup.action && <View>{currentPopup.action}</View>}
           </HeaderLayout>
+          <View style={{ flex: 1, width: "100%" }}>{currentPopup.content}</View>
         </Container>
       )}
     </>

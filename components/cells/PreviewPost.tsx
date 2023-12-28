@@ -18,10 +18,7 @@ export default function PreviewPost({ title = "User name" }) {
                     justifyContent: 'flex-start'
                 }}>
                     <PostAvatar />
-                    <Text style={{
-                        color: 'white',
-                        fontWeight: 'bold'
-                    }}>
+                    <Text style={styles.textTitle}>
                         {title}
                     </Text>
                 </View>

@@ -8,20 +8,23 @@ import {
   IconBtnSearch,
 } from "../atomes/Icon";
 import { useAppContext } from "../../AppContext";
+import Publish from "./Publish";
+
+
 
 export default function MainBar() {
-  const { addStackedView } = useAppContext();
+  const { addStackedView, dispatchPopupAction } = useAppContext();
 
   const createActivity = () => {
     addStackedView({
       id: 0,
       title: "Create publication",
       action: (
-        <Button style={[ButtonStyles.Primary]}>
+        <Button onClick={() => dispatchPopupAction({ type: "submit" })} style={[ButtonStyles.Primary]}>
           <Text>Create</Text>
         </Button>
       ),
-      content: <View style={{ flex: 1, backgroundColor: "red" }}></View>,
+      content: <Publish />,
       props: {},
     });
   };

@@ -19,7 +19,7 @@ type ContentProps = {
 
 export default function Content({ ListHeaderComponent = null, data, error }: ContentProps) {
     return (
-        <View style={{position: 'relative'}}>
+        <View style={{}}>
             { error &&
                 <View><Text> { error } </Text></View>
             || 

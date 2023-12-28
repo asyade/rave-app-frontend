@@ -9,11 +9,18 @@ export interface IStackedView<T = unknown> {
   // Add any other properties your stacked views may have
 }
 
+export type PopupAction = {
+  type: "close" | "submit";
+  payload?: any;
+}
+
 export type AppContextType<T = unknown> = {
   currentPopup: IStackedView<T> | null;
   stackedViews: IStackedView<T>[];
   addStackedView: (view: IStackedView<T>) => void;
   removeStackedView: (id: number) => void;
+  dispatchPopupAction: (action: PopupAction) => void;
+  lastPopupAction: PopupAction | null;
 };
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -21,6 +28,7 @@ export const AppContext = createContext<AppContextType | undefined>(undefined);
 export function AppContextProvider({ children }) {
   const [stackedViews, setStackedViews] = useState<IStackedView[]>([]);
   const [currentPopup, setCurrentPopup] = useState<IStackedView | null>(null);
+  const [lastPopupAction, setLastPopupAction] = useState<PopupAction | null>(null);
 
   useEffect(() => {
     if (stackedViews.length > 0) {
@@ -38,11 +46,17 @@ export function AppContextProvider({ children }) {
     setStackedViews((prevViews) => prevViews.filter((view) => view.id !== id));
   };
 
+  const dispatchPopupAction = (action: PopupAction) => {
+    setLastPopupAction(action);
+  }
+
   const value: AppContextType = {
     currentPopup,
     stackedViews,
     addStackedView,
     removeStackedView,
+    dispatchPopupAction,
+    lastPopupAction,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

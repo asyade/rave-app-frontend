@@ -15,6 +15,13 @@ const ButtonStyles = StyleSheet.create({
     backgroundColor: PRIMARY_COLOR,
     color: "white",
   },
+  DropDown: {
+    padding: 8,
+    alignItems: "center",
+    alignContent: "center",
+    backgroundColor: PRIMARY_COLOR,
+    color: "white",
+  },
 });
 
 export { ButtonStyles };
