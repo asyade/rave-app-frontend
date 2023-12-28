@@ -27,7 +27,8 @@
     "react-native-logs": "^5.0.1",
     "react-native-material-ripple": "^0.9.1",
     "react-native-web": "~0.19.6",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.2",
+    "react-native-reanimated": "~3.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

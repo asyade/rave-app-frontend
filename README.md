@@ -1,4 +1,4 @@
-<div style="width: 100%; text-align: center;">
+<div style="width: 100%; display: flex; justify-content: center">
    <img src="assets/icon.png" alt="drawing" width="200" />
 </div>
 
