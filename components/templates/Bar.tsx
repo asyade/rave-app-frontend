@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    columnGap: COMMON_SIDE_MARGIN,
     flexDirection: 'row',
     width: 'auto',
   }

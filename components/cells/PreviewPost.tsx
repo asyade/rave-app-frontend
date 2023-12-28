@@ -1,5 +1,5 @@
 import { View, Text, Image } from "react-native";
-import PostAvatar from "../atomes/AvatarButton";
+import PostAvatar from "../molecules/AvatarButton";
 import Section from "../templates/Section";
 import { COMMON_SIDE_MARGIN, styles } from "../theme";
 

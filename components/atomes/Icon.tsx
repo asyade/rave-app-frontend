@@ -16,6 +16,7 @@ const IconBtnAdd = AssetIcon({ asset: require('../../assets/icons/btn-add.png') 
 const IconBtnAlert = AssetIcon({ asset: require('../../assets/icons/btn-alert.png') })
 const IconBtnChat = AssetIcon({ asset: require('../../assets/icons/btn-chat.png') })
 const IconBtnSearch = AssetIcon({ asset: require('../../assets/icons/btn-search.png') })
+const IconBtnBack = AssetIcon({ style:{ width: 24, height: 17 }, asset: require('../../assets/icons/btn-back.png') })
 
 const IconTabHome = AssetIcon({ asset: require('../../assets/icons/tab-section-home.png') })
 const IconTabEvent = AssetIcon({ asset: require('../../assets/icons/tab-section-event.png') })
@@ -29,6 +30,7 @@ export {
     IconBtnAlert,
     IconBtnChat,
     IconBtnSearch,
+    IconBtnBack,
     IconTabHome,
     IconTabEvent,
     IconTabGems,

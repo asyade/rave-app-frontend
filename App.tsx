@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   View,
   Image,
-  ActivityIndicator,
   StatusBar,
 } from 'react-native';
 
@@ -11,14 +10,32 @@ import { logger } from "react-native-logs";
 import { styles } from './components/theme';
 import Main from './components/pages/Main';
 
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { AppContextProvider } from './AppContext';
+import Spinner from './components/atomes/Spinner';
+
 export const log = logger.createLogger();
+
+function AuthenticatedView({ credentials }: { credentials: Credentials }) {
+  const client = new ApolloClient({
+    headers: { authorization: `Bearer ${credentials.idToken}` },
+    uri: process.env.EXPO_PUBLIC_API_URL,
+    cache: new InMemoryCache()
+  });
+
+  return (
+    <ApolloProvider client={client}>
+      <Main credentials={credentials} />
+    </ApolloProvider>
+  );
+}
 
 export function MainView() {
   const { authorize, user, getCredentials, isLoading } = useAuth0();
   const [authenticating, setAuthenticating] = useState(false);
   const [credentials, setCredentials] = useState(undefined as Credentials | undefined);
 
-  const onLogin = () => authorize({ scope: 'openid profile email' })
+  const onLogin = () => authorize({ scope: 'openid profile email offline_access' })
     .then(() => getCredentials())
     .then(setCredentials)
     .then(() => setAuthenticating(false))
@@ -43,10 +60,10 @@ export function MainView() {
       {
         (user && credentials && !authenticating)
         &&
-        (<Main credentials={credentials} />)
+        (<AuthenticatedView credentials={credentials} />)
         ||
         (<View style={styles.absoluteFill}>
-          <ActivityIndicator />
+          <Spinner />
         </View>)
       }
     </>
@@ -55,7 +72,7 @@ export function MainView() {
 
 export default function App() {
   return (
-    <>
+    <AppContextProvider>
       <StatusBar
         backgroundColor={'#151414'}
         barStyle={'light-content'}
@@ -65,6 +82,6 @@ export default function App() {
       <Auth0Provider domain={process.env.EXPO_PUBLIC_AUTH0_DOMAIN} clientId={process.env.EXPO_PUBLIC_AUTH0_CLIENT_ID}>
         <MainView />
       </Auth0Provider>
-    </>
+    </AppContextProvider>
   );
 }

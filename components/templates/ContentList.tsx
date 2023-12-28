@@ -1,10 +1,11 @@
-import { ActivityIndicator, FlatList, View, Text } from "react-native";
+import { FlatList, View, Text } from "react-native";
 import { COMMON_SECTION_GAP } from "../theme";
 import PreviewPost from "../cells/PreviewPost";
+import Spinner from "../atomes/Spinner";
 
 function renderItem(item) {
     return (
-        <View style={{ paddingBottom: 4 }} id={item.id}>
+        <View style={{ paddingBottom: 4 }} id={item.uid}>
             <PreviewPost></PreviewPost>
         </View>
     )
@@ -26,12 +27,12 @@ export default function Content({ ListHeaderComponent = null, data, error }: Con
                     ListHeaderComponent={ListHeaderComponent}
                     data={data}
                     renderItem={({ item }) => <>{ renderItem(item) }</>}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item.uid}
                 />
             }
             {
                 (!data) && (
-                    <View style={{ flex: 1, paddingTop: COMMON_SECTION_GAP }}><ActivityIndicator></ActivityIndicator></View>
+                    <View style={{ flex: 1, paddingTop: COMMON_SECTION_GAP }}><Spinner /></View>
                 )
             }
         </View>

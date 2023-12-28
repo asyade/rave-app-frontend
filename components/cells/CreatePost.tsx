@@ -1,7 +1,7 @@
 import { Text, View, Image, Pressable } from "react-native";
 import Section from "../templates/Section";
 import { COMMON_SIDE_MARGIN, styles } from "../theme";
-import PostAvatar from "../atomes/AvatarButton";
+import PostAvatar from "../molecules/AvatarButton";
 
 export default function CreatePost() {
     return (
