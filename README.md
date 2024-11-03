@@ -1,4 +1,4 @@
-# Rave Mobile App Template
+# Expo Frontend Template: GraphQL + Auth0
 
 A React Native mobile application template built with Expo framework, designed to work seamlessly with this [Rust Backend Template](https://github.com/asyade/rust-backend-template-graphql-sqlx-openid).
 
